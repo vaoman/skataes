@@ -30,6 +30,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 10;
         }
         button:hover {
             background-color: rgba(255, 255, 255, 1);
@@ -37,7 +38,7 @@
     </style>
 </head>
 <body>
-    <audio id="audio">
+    <audio id="audio" crossorigin="anonymous">
         <source src="vaoman.m4a" type="audio/m4a">
     </audio>
     <button id="playBtn">▶</button>
@@ -45,15 +46,22 @@
         const audio = document.getElementById('audio');
         const playBtn = document.getElementById('playBtn');
         
-        playBtn.addEventListener('click', function() {
+        playBtn.onclick = function(e) {
+            e.preventDefault();
+            console.log('Button clicked, audio paused:', audio.paused);
             if (audio.paused) {
-                audio.play();
-                playBtn.textContent = '⏸';
+                audio.play().then(() => {
+                    playBtn.textContent = '⏸';
+                    console.log('Playing');
+                }).catch(err => {
+                    console.error('Play error:', err);
+                });
             } else {
                 audio.pause();
                 playBtn.textContent = '▶';
+                console.log('Paused');
             }
-        });
+        };
     </script>
 </body>
 </html>
