@@ -20,56 +20,21 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-color: #000;
-        }
-        button {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            font-size: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
-            transition: background-color 0.2s;
         }
-        button:hover {
-            background-color: rgba(255, 255, 255, 1);
-        }
-        button:active {
-            transform: scale(0.95);
+        audio {
+            width: 300px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <audio id="audio" crossorigin="anonymous">
+    <audio controls>
         <source src="vaoman.m4a" type="audio/m4a">
+        Your browser does not support the audio element.
     </audio>
-    <button id="playBtn">▶</button>
-    <script>
-        const audio = document.getElementById('audio');
-        const playBtn = document.getElementById('playBtn');
-        
-        playBtn.onclick = function(e) {
-            e.preventDefault();
-            if (audio.paused) {
-                audio.play().then(() => {
-                    playBtn.textContent = '⏸';
-                }).catch(err => {
-                    console.error('Play error:', err);
-                });
-            } else {
-                audio.pause();
-                playBtn.textContent = '▶';
-            }
-        };
-    </script>
 </body>
 </html>
